@@ -1,7 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { sequelize as db } from '../db/models';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const getDB = require('../db/models');
 
+const db = getDB();
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3010;
@@ -11,10 +15,10 @@ async function bootstrap() {
         const app = await NestFactory.create(AppModule);
         app.enableCors();
 
-        await db.authenticate();
+        await db.sequelize.authenticate();
         console.log('Connection has been established successfully.');
 
-        await db.sync();
+        await db.sequelize.sync();
         console.log('All models were synchronized successfully.');
 
         await app.listen(PORT);

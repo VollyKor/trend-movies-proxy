@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
 const DB_USER_NAME = process.env.DB_USER_NAME || 'postgres';

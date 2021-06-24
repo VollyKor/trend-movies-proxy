@@ -8,6 +8,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             user_id: Sequelize.STRING,
+            user_name: Sequelize.STRING,
             telegram_id: Sequelize.STRING,
             clicks: {
                 type: Sequelize.INTEGER,
