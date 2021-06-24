@@ -1,12 +1,13 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Req, Controller, Post } from '@nestjs/common';
 import { StatisticService } from './statistic.service';
+import { Request } from 'express';
 
 @Controller('statistic')
 export class StatisticController {
     constructor(private statisticService: StatisticService) {}
 
     @Post()
-    async addFilm(@Body() data) {
-        return this.statisticService.add(data);
+    async addFilm(@Req() req: Request) {
+        return this.statisticService.add(req.body);
     }
 }
