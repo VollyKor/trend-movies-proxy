@@ -1,8 +1,21 @@
 import { Module } from '@nestjs/common';
-import { FavoriteMoviesModule } from './favorite-movies/favorite-movies.module';
+import { SequelizeModule } from '@nestjs/sequelize';
+
 import { StatisticModule } from './statistic/statistic.module';
 
 @Module({
-  imports: [FavoriteMoviesModule, StatisticModule],
+    imports: [
+        SequelizeModule.forRoot({
+            dialect: 'postgres',
+            host: 'localhost',
+            port: 5450,
+            username: 'postgres',
+            password: 'Respubli4ka',
+            database: 'trend_movies',
+            autoLoadModels: true,
+            synchronize: true,
+        }),
+        StatisticModule,
+    ],
 })
 export class AppModule {}
