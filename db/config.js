@@ -23,7 +23,7 @@ module.exports = {
         username: DB_USER_NAME,
         password: DB_PASSWORD,
         database: DB_DATABASE,
-        host: '127.0.0.1',
+        host: DB_HOST,
         port: DB_PORT,
         dialect: 'postgres',
         dialectOptions: {

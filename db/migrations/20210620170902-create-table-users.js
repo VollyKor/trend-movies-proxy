@@ -9,7 +9,7 @@ module.exports = {
             },
             user_id: Sequelize.STRING,
             user_name: Sequelize.STRING,
-            telegram_id: Sequelize.STRING,
+            email: Sequelize.STRING,
             clicks: {
                 type: Sequelize.INTEGER,
                 default: 0,

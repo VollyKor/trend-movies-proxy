@@ -11,12 +11,6 @@ async function bootstrap() {
         const app = await NestFactory.create(AppModule);
         app.enableCors();
 
-        // await db.sequelize.authenticate();
-        // console.log('Connection has been established successfully.');
-
-        // await db.sequelize.sync();
-        // console.log('All models were synchronized successfully.');
-
         await app.listen(PORT);
         console.log('Server runing on port: ', PORT);
     } catch (error) {

@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { StatisticModule } from './statistic/statistic.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { JwtService } from '@nestjs/jwt';
+
 @Module({
     imports: [
         ConfigModule.forRoot(),
@@ -16,6 +20,8 @@ import { StatisticModule } from './statistic/statistic.module';
             synchronize: true,
         }),
         StatisticModule,
+        AuthModule,
+        UsersModule,
     ],
 })
 export class AppModule {}

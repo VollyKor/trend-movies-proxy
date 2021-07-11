@@ -1,13 +1,17 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { User } from '../models/User';
 
-export const checkUser = async ({ userId: user_id }) => {
+export const checkUser = async (params) => {
+    const user = await User.findOne({ where: params });
+    return user?.get();
+};
+export const checkUserById = async ({ userId: user_id }) => {
     const user = await User.findOne({ where: { user_id } });
     return user?.get();
 };
 
-export const addUser = async ({ userId: user_id }) => {
-    const newUser = await User.create({ user_id });
+export const addUser = async (data) => {
+    const newUser = await User.create({ ...data });
     return newUser.get();
 };
 

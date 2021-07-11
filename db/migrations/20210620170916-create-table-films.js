@@ -8,7 +8,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             film_id: {
-                type: Sequelize.STRING,
+                type: Sequelize.BIGINT,
             },
             film_clicks: {
                 type: Sequelize.INTEGER,
