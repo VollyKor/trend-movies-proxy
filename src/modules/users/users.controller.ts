@@ -1,21 +1,22 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService) {}
+
+    @UseGuards(LocalAuthGuard)
     @Post('login')
-    async loginHangler(@Body() data: any) {
-        await this.userService.userlogin(data);
-        return 'Hello';
+    async loginHangler(@Req() req) {
+        // const credentials = await this.userService.login(data);
+        return req.user;
     }
 
     @Post('signup')
     async signUpHandler(@Body() userData) {
-        console.log(userData);
-        //  создать usera
-        // вернуть сразу токен
+        return await this.userService.signUp(userData);
     }
 
     @Get('encrypt/:password')

@@ -19,11 +19,13 @@ export class FavoriteMoviesService {
         const film = this.films.find((film) => film.id === id);
         return film;
     }
+
     public removeFilm(id) {
         console.log('remove film');
         const films = this.films.filter((film) => film.id !== id);
         return (this.films = films);
     }
+
     public updateFilm(id) {
         console.log('update film');
         const films = this.films.map((film) => {

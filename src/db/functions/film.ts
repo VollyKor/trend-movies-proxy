@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import { Film } from '../models/Film';
+import { Film } from 'src/modules/film/film.entity';
 
 export const checkFilm = async ({ id }) => {
     const film = await Film.findOne({ where: { film_id: id } });
