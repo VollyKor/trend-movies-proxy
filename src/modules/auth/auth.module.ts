@@ -10,6 +10,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 @Module({
     imports: [
         DatabaseModule,
+
         PassportModule,
         JwtModule.register({
             secret: process.env.JWT_PASSWORD || 'secret key',
