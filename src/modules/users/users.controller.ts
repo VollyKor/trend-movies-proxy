@@ -1,17 +1,17 @@
-import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-    constructor(private userService: UsersService) {}
+    constructor(private userService: UsersService, private authService: AuthService) {}
 
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async loginHangler(@Req() req) {
-        // const credentials = await this.userService.login(data);
-        return req.user;
+        return this.authService.createToken(req.user);
     }
 
     @Post('signup')
@@ -19,16 +19,9 @@ export class UsersController {
         return await this.userService.signUp(userData);
     }
 
-    @Get('encrypt/:password')
-    async encryptHandler(@Param() { password }) {
-        const saltOrRounds = 10;
-        const hash = await bcrypt.hash(password, saltOrRounds);
-
-        return hash;
-    }
-    @Get('validatePass/:password')
-    async validatePasswordHandler(@Param() { password }, @Body() { hash }) {
-        const isMatch = await bcrypt.compare(password, hash);
-        return isMatch;
+    @UseGuards(JwtAuthGuard)
+    @Get()
+    async getAllUsersHandler() {
+        return this.userService.getAll();
     }
 }

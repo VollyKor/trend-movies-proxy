@@ -6,6 +6,7 @@ import { UsersModule } from './modules/users/users.module';
 import { FilmService } from './modules/film/film.service';
 import { DatabaseModule } from './modules/db/db.module';
 import { FilmModule } from './modules/film/film.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { FilmModule } from './modules/film/film.module';
         DatabaseModule,
         StatisticModule,
         AuthModule,
+        PassportModule,
     ],
 })
 export class AppModule {}
