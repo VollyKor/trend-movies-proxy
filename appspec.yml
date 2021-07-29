@@ -8,7 +8,7 @@ hooks:
     - location: scripts/install_nodejs
       timeout: 3000
       runas: root
-  AfterInstall:
+  Install:
     - location: scripts/install_dependencies
       timeout: 3000
       runas: root
