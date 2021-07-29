@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo yum install nodejs
+
 node -v
 npm -v
  npm i
