@@ -12,6 +12,7 @@ export const databaseProviders = {
             username: process.env.DB_USER_NAME || 'postgres',
             password: process.env.DB_PASSWORD || '',
             database: process.env.DB_DATABASE || 'postgres',
+            logging: false,
         });
         sequelize.addModels([User, Film]);
         await sequelize.sync();
