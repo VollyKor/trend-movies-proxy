@@ -20,8 +20,8 @@ export class UsersController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get()
-    async getAllUsersHandler() {
-        return this.userService.getAll();
+    @Post('check-token')
+    async getAllUsersHandler(@Req() req) {
+        return this.userService.checkUser(req?.user);
     }
 }
