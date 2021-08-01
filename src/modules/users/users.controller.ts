@@ -16,12 +16,16 @@ export class UsersController {
 
     @Post('signup')
     async signUpHandler(@Body() userData) {
-        return await this.userService.signUp(userData);
+        const newUser = await this.userService.signUp(userData);
+        return {
+            ...(await this.authService.createToken(newUser)),
+            user: newUser,
+        };
     }
 
     @UseGuards(JwtAuthGuard)
     @Post('check-token')
-    async getAllUsersHandler(@Req() req) {
+    async checkTokenHandler(@Req() req) {
         return this.userService.checkUser(req?.user);
     }
 }
