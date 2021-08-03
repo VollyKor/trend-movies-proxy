@@ -7,6 +7,7 @@ import { DatabaseModule } from './modules/db/db.module';
 import { FilmModule } from './modules/film/film.module';
 import { PassportModule } from '@nestjs/passport';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { RatingModule } from './modules/rating/rating.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
         StatisticModule,
         AuthModule,
         PassportModule,
+        RatingModule,
     ],
 })
 export class AppModule implements NestModule {

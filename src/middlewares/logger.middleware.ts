@@ -11,7 +11,9 @@ export class LoggerMiddleware implements NestMiddleware {
 
         response.on('readable', () => {
             this.logger.log(
-                `Request Body:${request.body}, Request Params:${request.params}, Request Query: ${request.query}`,
+                `Request Body:${JSON.stringify(request.body)}, Request Params:${
+                    request.params
+                }, Request Query: ${request.query}`,
             );
         });
 

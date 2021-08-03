@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Film } from '../film/film.entity';
 import { User } from '../users/user.entity';
+import { Rating } from '../rating/rating.entity';
 
 export const databaseProviders = {
     provide: 'SEQUELIZE',
@@ -14,7 +15,7 @@ export const databaseProviders = {
             database: process.env.DB_DATABASE || 'postgres',
             logging: false,
         });
-        sequelize.addModels([User, Film]);
+        sequelize.addModels([User, Film, Rating]);
         await sequelize.sync();
         return sequelize;
     },

@@ -1,5 +1,13 @@
-import { Column, DataType, Model, Table, UpdatedAt, CreatedAt } from 'sequelize-typescript';
-
+import {
+    Column,
+    DataType,
+    Model,
+    Table,
+    UpdatedAt,
+    CreatedAt,
+    HasMany,
+} from 'sequelize-typescript';
+import { Rating } from 'src/modules/rating/rating.entity';
 @Table({ tableName: 'users' })
 export class User extends Model {
     @Column user_id: string;
@@ -13,4 +21,7 @@ export class User extends Model {
     createdAt: Date;
     @UpdatedAt
     updatedAt: Date;
+
+    @HasMany(() => Rating)
+    rating: Rating[];
 }
