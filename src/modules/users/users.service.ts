@@ -33,21 +33,27 @@ export class UsersService {
             throw new BadRequestException(error);
         }
     }
-    public checkUser = async (params) => {
+
+    public checkUser = async (id) => {
         const user = await this.usersRepository.findOne({
-            where: params,
+            where: {
+                id,
+            },
             attributes: ['id', 'email', 'clicks', 'favorite_movies', 'movies_to_watch'],
         });
         return user?.get();
     };
+
     public checkUserById = async ({ userId: user_id }) => {
         const user = await this.usersRepository.findOne({ where: { user_id } });
         return user?.get();
     };
+
     public addUser = async (data) => {
         const newUser = await this.usersRepository.create({ ...data });
         return newUser.get();
     };
+
     public updateUser = async (userId, userOpts) => {
         const updatedUser = await this.usersRepository.update(
             { where: { id: userId } },
@@ -55,12 +61,12 @@ export class UsersService {
         );
         return updatedUser;
     };
+
     public removeUser = async (user_id) => {
         const isDeleted = await this.usersRepository.destroy({ where: { user_id } });
         return isDeleted;
     };
-    public addUserClick = async (user_id) => {
-        const click = await this.usersRepository.increment('clicks', { where: { user_id } });
-        return click;
-    };
+
+    public addUserClick = async (id) =>
+        await this.usersRepository.increment('clicks', { where: { id } });
 }

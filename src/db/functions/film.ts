@@ -5,8 +5,8 @@ export const checkFilm = async ({ id }) => {
     return film?.get();
 };
 
-export const addFilm = async ({ film_id, film_name }) => {
-    const newFilm = await Film.create({ film_id, film_name });
+export const addFilm = async ({ film_id, name, film_clicks = 1 }) => {
+    const newFilm = await Film.create({ film_id, name, film_clicks });
     return newFilm.get();
 };
 
@@ -21,5 +21,5 @@ export const removeFilm = async (film_id) => {
 };
 
 export const addFilmClick = async ({ film_id }) => {
-    await Film.increment('film_clicks', { where: { film_id } });
+    await Film.increment('film_clicks', { where: { film_id: parseInt(film_id) } });
 };

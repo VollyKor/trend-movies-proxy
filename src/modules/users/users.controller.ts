@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
@@ -10,12 +10,12 @@ export class UsersController {
 
     @UseGuards(LocalAuthGuard)
     @Post('login')
-    async loginHangler(@Req() req) {
+    async loginHangler(@Req() req: any) {
         return this.authService.createToken(req.user);
     }
 
     @Post('signup')
-    async signUpHandler(@Body() userData) {
+    async signUpHandler(@Body() userData: any) {
         const newUser = await this.userService.signUp(userData);
         return {
             ...(await this.authService.createToken(newUser)),
@@ -25,7 +25,7 @@ export class UsersController {
 
     @UseGuards(JwtAuthGuard)
     @Post('check-token')
-    async checkTokenHandler(@Req() req) {
-        return this.userService.checkUser(req?.user);
+    async checkTokenHandler(@Req() req: any) {
+        return this.userService.checkUser(req?.user?.id);
     }
 }
