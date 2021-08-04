@@ -10,7 +10,16 @@ import {
     ForeignKey,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'rating' })
+@Table({
+    tableName: 'rating',
+    indexes: [
+        {
+            name: 'unique_pair_keys',
+            unique: true,
+            fields: ['film_id', 'user_id'],
+        },
+    ],
+})
 export class Rating extends Model {
     @ForeignKey(() => Film)
     @Column(DataType.BIGINT)
@@ -23,6 +32,6 @@ export class Rating extends Model {
     @Column(DataType.INTEGER)
     rating: number;
 
-    @CreatedAt createdAt: Date;
-    @UpdatedAt updatedAt: Date;
+    @CreatedAt created_at: Date;
+    @UpdatedAt updated_at: Date;
 }

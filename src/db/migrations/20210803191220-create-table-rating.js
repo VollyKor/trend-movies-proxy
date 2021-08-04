@@ -1,6 +1,6 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('rating', {
+        const Rating = await queryInterface.createTable('rating', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -8,7 +8,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             film_id: {
-                type: Sequelize.BIGINT,
+                type: Sequelize.INTEGER,
                 references: {
                     model: {
                         tableName: 'films',
@@ -36,6 +36,12 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
+        });
+
+        await queryInterface.addConstraint('rating', {
+            fields: ['film_id', 'user_id'],
+            type: 'unique',
+            name: 'unique_pair_keys',
         });
     },
     down: async (queryInterface) => {
