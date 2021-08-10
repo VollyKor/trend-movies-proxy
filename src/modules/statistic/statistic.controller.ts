@@ -1,6 +1,7 @@
-import { Req, Controller, Post, HttpCode } from '@nestjs/common';
+import { Req, Controller, Post, HttpCode, UseGuards } from '@nestjs/common';
 import { StatisticService } from './statistic.service';
 import { Request } from 'express';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('statistic')
 export class StatisticController {
@@ -8,6 +9,7 @@ export class StatisticController {
 
     @Post()
     @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
     async addFilm(@Req() req: Request) {
         const userData = req.body?.user;
         const filmData = req.body?.data;

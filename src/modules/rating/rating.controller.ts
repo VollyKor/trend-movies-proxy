@@ -7,9 +7,11 @@ import {
     ParseIntPipe,
     Patch,
     Post,
+    Req,
     UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { HandleRatingDto } from './dto';
 import { RatingService } from './rating.service';
 
 @Controller('rating')
@@ -41,13 +43,16 @@ export class RatingController {
 
     @UseGuards(JwtAuthGuard)
     @Post('/handle')
-    async ratingHandler(@Body() data: any) {
-        return this.ratingService.handleRating(data);
+    async ratingHandler(@Req() req: any, @Body() data: any) {
+        return this.ratingService.handleRating(req.user.id, data);
     }
 
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
-    async updateRatingHandler(@Param('id', ParseIntPipe) id: number, @Body() data: any) {
+    async updateRatingHandler(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() data: HandleRatingDto,
+    ) {
         return this.ratingService.updateByIdRating(id, data);
     }
 

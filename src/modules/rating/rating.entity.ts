@@ -22,7 +22,7 @@ import {
 })
 export class Rating extends Model {
     @ForeignKey(() => Film)
-    @Column(DataType.BIGINT)
+    @Column({ type: DataType.BIGINT })
     film_id: number;
 
     @ForeignKey(() => User)

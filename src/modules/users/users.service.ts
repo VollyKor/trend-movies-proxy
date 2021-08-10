@@ -34,11 +34,9 @@ export class UsersService {
         }
     }
 
-    public checkUser = async (id) => {
+    public checkUser = async (params) => {
         const user = await this.usersRepository.findOne({
-            where: {
-                id,
-            },
+            where: params,
             attributes: ['id', 'email', 'clicks', 'favorite_movies', 'movies_to_watch'],
         });
         return user?.get();

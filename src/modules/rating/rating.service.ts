@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Sequelize } from 'sequelize';
+import { HandleRatingDto } from './dto';
 // import { Connection } from 'sequelize/types/lib/connection-manager';
 import { Rating } from './rating.entity';
 
@@ -50,15 +51,16 @@ export class RatingService {
     public async deleteRating(id: number) {
         return this.ratingRepository.destroy({ where: { id } });
     }
-    public async handleRating(data: any) {
+
+    public async handleRating(userId: number, { filmId: film_id, rating }: HandleRatingDto) {
         const currentRating = await this.getByParamsRating({
-            user_id: data.user_id,
-            film_id: data.film_id,
+            user_id: userId,
+            film_id,
         });
 
-        if (!currentRating) return this.addRating(data);
-        if (data.rating === currentRating.rating) return currentRating.get();
+        if (!currentRating) return this.addRating({ film_id, rating, user_id: userId });
+        if (rating === currentRating.rating) return currentRating.get();
 
-        return this.updateByIdRating(currentRating.id, data);
+        return this.updateByIdRating(currentRating.id, { film_id, rating });
     }
 }

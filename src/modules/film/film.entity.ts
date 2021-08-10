@@ -11,7 +11,7 @@ import { Rating } from '../rating/rating.entity';
 
 @Table({ tableName: 'films' })
 export class Film extends Model {
-    @Column(DataType.BIGINT)
+    @Column({ type: DataType.BIGINT, primaryKey: true })
     film_id: number;
 
     @Column
