@@ -29,7 +29,7 @@ export class RatingController {
     async getAllRatingHandler() {
         return this.ratingService.getAllRating();
     }
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get('/average/:id')
     async getaverageRatingHandler(@Param('id', ParseIntPipe) filmId: number) {
         return this.ratingService.getAverageFilmRating(filmId);

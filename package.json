@@ -32,6 +32,7 @@
         "bcrypt": "^5.0.1",
         "class-transformer": "^0.4.0",
         "class-validator": "^0.13.1",
+        "convert-excel-to-json": "^1.7.0",
         "dotenv": "^10.0.0",
         "nestjs-config": "^1.4.8",
         "passport": "^0.4.1",
