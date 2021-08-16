@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Film } from '../film/film.entity';
 import { User } from '../users/user.entity';
 import { Rating } from '../rating/rating.entity';
+import { ChosenMovies } from '../favorite-movies/chosenMovies.entity';
 
 export const databaseProviders = {
     provide: 'SEQUELIZE',
@@ -16,7 +17,7 @@ export const databaseProviders = {
             logging: false,
             // sync: { force: true },
         });
-        sequelize.addModels([User, Film, Rating]);
+        sequelize.addModels([User, Film, Rating, ChosenMovies]);
         await sequelize.sync();
         return sequelize;
     },

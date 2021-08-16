@@ -7,6 +7,7 @@ import {
     CreatedAt,
     HasMany,
 } from 'sequelize-typescript';
+import { ChosenMovies } from '../favorite-movies/chosenMovies.entity';
 import { Rating } from '../rating/rating.entity';
 
 @Table({ tableName: 'films' })
@@ -25,4 +26,7 @@ export class Film extends Model {
 
     @HasMany(() => Rating)
     rating: Rating[];
+
+    @HasMany(() => ChosenMovies)
+    chosen_movies: ChosenMovies[];
 }
