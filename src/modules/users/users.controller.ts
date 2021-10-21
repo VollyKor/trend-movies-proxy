@@ -1,4 +1,6 @@
 import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+
+import { UserId } from 'src/utils/decorators/UserId';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
@@ -25,7 +27,7 @@ export class UsersController {
 
     @UseGuards(JwtAuthGuard)
     @Post('check-token')
-    async checkTokenHandler(@Req() req: any) {
-        return this.userService.checkUser(req?.user?.id);
+    async checkTokenHandler(@UserId() id: number) {
+        return this.userService.checkUser(id);
     }
 }

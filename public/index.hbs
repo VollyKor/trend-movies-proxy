@@ -1,0 +1,28 @@
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='stylesheet' href='main.css' />
+        <title>{{message}}</title>
+    </head>
+    <body class='container'>
+        <header class='header'>{{header}}</header>
+        <main>
+            <h1 class='title'>{{title}}</h1>
+            <p class='descr'>{{description}}</p>
+            <form class='form' action='/' method='post'>
+                {{#each sheduleOptions}}
+                    <label class='form-label'>
+                        <input type='radio' name='time' value={{this.value}} id=`{{this.id}}` />
+                        <p class='label-descr'> {{this.descr}}</p>
+                    </label>
+                {{/each}}
+            </form>
+            <form action='/now' method='post'>
+                <button class='send-now-btn' type='submit'>Отправить сейчас</button>
+            </form>
+        </main>
+        <footer class='footer'></footer>
+    </body>
+</html>

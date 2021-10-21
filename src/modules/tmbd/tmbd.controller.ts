@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Req } from '@nestjs/common';
+import { CheckToken } from 'src/utils/decorators/CheckToken';
+import { UserId } from 'src/utils/decorators/UserId';
 import { TmbdService } from './tmbd.service';
 
 @Controller('tmbd')
@@ -10,9 +12,10 @@ export class TmbdController {
         return this.tmbdService.getTrendMovies(page);
     }
 
-    @Get('/review/:id')
-    async getReview(@Param('id') id: string) {
-        return this.tmbdService.getReview(id);
+    @Get('/review/:id/:page')
+    async getReview(@Param() params: any) {
+        const { id, page } = params;
+        return this.tmbdService.getReview(id, page);
     }
 
     @Get('/img-url')
@@ -36,12 +39,14 @@ export class TmbdController {
     }
 
     @Get('/movie/:id')
-    async getFilmById(@Param('id') id: string) {
-        return this.tmbdService.getFilmById(id);
+    async getFilmById(@Param('id') id: string, @CheckToken() user: any) {
+        console.log(user);
+
+        return this.tmbdService.getFilmById(id, user?.id);
     }
 
-    @Get('search/movie/:name')
-    async searchFilm(@Param('name') name: string) {
-        return this.tmbdService.searchFilms(name);
+    @Get('search/movie/')
+    async searchFilm(@Query('query') query: string) {
+        return this.tmbdService.searchFilms(query);
     }
 }

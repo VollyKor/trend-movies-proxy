@@ -7,6 +7,7 @@ import { DatabaseModule } from '../db/db.module';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+import { CustomLoggerModule } from 'src/service/loggers/logger.module';
 
 @Module({
     imports: [
@@ -14,6 +15,7 @@ import { LocalStrategy } from './strategies/local.strategy';
         DatabaseModule,
         AuthModule,
         PassportModule,
+        CustomLoggerModule,
         JwtModule.register({
             secret: process.env.JWT_PASSWORD,
             signOptions: { expiresIn: '7d' },

@@ -9,10 +9,13 @@ import { DatabaseModule } from './modules/db/db.module';
 import { FilmModule } from './modules/film/film.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { RatingModule } from './modules/rating/rating.module';
-import { StatisticModule } from './modules/statistic/statistic.module';
 import { TestModule } from './modules/test/test.module';
 import { TmbdModule } from './modules/tmbd/tmbd.module';
 import { RedisApiModule } from './service/redis/redis.module';
+import { CustomLoggerModule } from './service/loggers/logger.module';
+import { FavoriteMoviesModule } from './modules/favorite-movies/favorite-movies.module';
+import { AppController } from './app/app.controller';
+import { AppService } from './app/app.service';
 
 @Module({
     imports: [
@@ -21,23 +24,24 @@ import { RedisApiModule } from './service/redis/redis.module';
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => [
                 {
-                    host: configService.get('REDIS_HOST'),
-                    port: configService.get('REDIS_PORT'),
-                    password: configService.get('REDIS_PASSWORD'),
+                    url: configService.get('REDIS_URL'),
                 },
             ],
         }),
         UsersModule,
         FilmModule,
+        FavoriteMoviesModule,
         DatabaseModule,
-        StatisticModule,
         AuthModule,
         PassportModule,
         RatingModule,
         TestModule,
         TmbdModule,
         RedisApiModule,
+        CustomLoggerModule,
     ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

@@ -12,12 +12,15 @@ import { User } from '../users/user.entity';
 
 @Table({ tableName: 'chosen_movies' })
 export class ChosenMovies extends Model {
+    @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
+    id: number;
+
     @ForeignKey(() => Film)
-    @Column({ type: DataType.BIGINT, primaryKey: true })
+    @Column({ type: DataType.BIGINT, unique: 'film_pair' })
     film_id: number;
 
     @ForeignKey(() => User)
-    @Column(DataType.INTEGER)
+    @Column({ type: DataType.INTEGER, unique: 'film_pair' })
     user_id: number;
 
     @Column({ defaultValue: 0, type: DataType.INTEGER })

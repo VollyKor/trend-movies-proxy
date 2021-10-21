@@ -7,8 +7,10 @@ import {
     CreatedAt,
     HasMany,
 } from 'sequelize-typescript';
+
 import { Rating } from 'src/modules/rating/rating.entity';
 import { ChosenMovies } from '../favorite-movies/chosenMovies.entity';
+
 @Table({ tableName: 'users' })
 export class User extends Model {
     @Column(DataType.STRING) user_name: string;

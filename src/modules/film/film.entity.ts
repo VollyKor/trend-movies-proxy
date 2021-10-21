@@ -15,7 +15,7 @@ export class Film extends Model {
     @Column({ type: DataType.BIGINT, primaryKey: true })
     film_id: number;
 
-    @Column
+    @Column({ type: DataType.TEXT })
     name: string;
 
     @Column({ defaultValue: 0, type: DataType.INTEGER })
