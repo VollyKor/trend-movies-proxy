@@ -7,9 +7,9 @@
     "license": "UNLICENSED",
     "scripts": {
         "prebuild": "rimraf dist && npm i npm install @nestjs/cli",
-        "build": "npx nest build",
+        "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-        "start": "npx nest start",
+        "start": "nest start",
         "start:dev": "nest start --watch",
         "start:debug": "nest start --debug --watch",
         "start:prod": "node dist/main",
